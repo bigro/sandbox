@@ -12,8 +12,8 @@ public class Point {
     /**
      * ポイントが使用可能か？
      */
-    public PointStatus canUse(PointAmount pointAmount) {
-        if (amount.greaterThen(pointAmount)) {
+    public PointStatus canUse(PointAmount usePoint) {
+        if (amount.greaterThen(usePoint)) {
             return PointStatus.使用可能;
         }
 
