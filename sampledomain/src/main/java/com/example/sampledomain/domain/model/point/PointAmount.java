@@ -17,4 +17,8 @@ public class PointAmount {
     public PointAmount subtraction(PointAmount other) {
         return new PointAmount(value - other.value);
     }
+
+    public boolean greaterThen(PointAmount other) {
+        return value > other.value;
+    }
 }
