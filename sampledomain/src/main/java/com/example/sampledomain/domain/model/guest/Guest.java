@@ -1,17 +1,19 @@
 package com.example.sampledomain.domain.model.guest;
 
+import com.example.sampledomain.domain.model.user.User;
+
 /**
  * ゲストユーザー
  */
 public class Guest {
-    GuestIdentifier identifier;
+    User user;
 
-    private Guest(GuestIdentifier identifier) {
-        this.identifier = identifier;
+    private Guest(User user) {
+        this.user = user;
     }
 
-    // ゲストは履歴などを保持する必要がないので毎回IDが新しく生成される
+    // ゲストは履歴などを保持する必要がないので毎回新しく生成される
     public static Guest genarate() {
-        return new Guest(GuestIdentifier.generate());
+        return new Guest(User.generateGuest());
     }
 }
