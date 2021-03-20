@@ -5,5 +5,14 @@ import com.example.sampledomain.domain.model.user.UserApplication;
 import com.example.sampledomain.domain.model.user.UserIdentifier;
 
 public interface UserRepository {
-    UserApplication getApplication(UserIdentifier userIdentifier);
+
+    void saveApplication(UserApplication userApplication);
+
+    void saveUser(User user);
+
+    boolean exists(UserIdentifier userIdentifier);
+
+    boolean existsApplication(UserIdentifier userIdentifier);
+
+    UserApplication currentApplication(UserIdentifier userIdentifier);
 }

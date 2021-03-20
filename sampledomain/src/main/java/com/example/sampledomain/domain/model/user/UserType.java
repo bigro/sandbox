@@ -5,4 +5,8 @@ package com.example.sampledomain.domain.model.user;
  */
 public enum UserType {
     プレミアム会員, 会員, ゲスト;
+
+    public boolean isGuest() {
+        return this == UserType.ゲスト;
+    }
 }

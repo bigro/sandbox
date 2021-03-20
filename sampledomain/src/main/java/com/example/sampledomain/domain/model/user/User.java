@@ -12,15 +12,19 @@ public class User {
         this.type = type;
     }
 
-    public static User generateGuest() {
-        return new User(UserIdentifier.generate(), UserType.ゲスト);
-    }
-
-    public static User of(UserType type) {
-        return new User(UserIdentifier.generate(), type);
+    public static User guest(UserIdentifier identifier) {
+        return new User(identifier, UserType.ゲスト);
     }
 
     public UserType type() {
         return type;
+    }
+
+    public UserIdentifier identifier() {
+        return identifier;
+    }
+
+    public boolean isGuest() {
+        return type.isGuest();
     }
 }

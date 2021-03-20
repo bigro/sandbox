@@ -1,8 +1,13 @@
 package com.example.sampledomain.application.service;
 
 import com.example.sampledomain.application.repository.UserRepository;
+import com.example.sampledomain.domain.model.guest.Guest;
 import com.example.sampledomain.domain.model.user.*;
+import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
+
+@Service
 public class UserService {
 
     UserRepository userRepository;
@@ -11,12 +16,34 @@ public class UserService {
         this.userRepository = userRepository;
     }
 
-    public UserType getUserType(UserIdentifier userIdentifier) {
-        UserApplication application = userRepository.getApplication(userIdentifier);
+    /**
+     * 会員登録
+     */
+    public void registerMember(Guest guest) {
+        userRepository.saveUser(guest.user());
 
-        UserTransitionCondition transitionCondition = application.toTransitionCondition();
+        UserApplication userApplication = new UserApplication(
+                guest.user(),
+                ApplicationState.会員登録,
+                new ApplicationDateTime(LocalDateTime.now())
+        );
+        userRepository.saveApplication(userApplication);
+    }
 
-        UserTransitionTable transitionTable = new UserTransitionTable();
-        return transitionTable.of(transitionCondition);
+    /**
+     * ユーザーを取得する
+     */
+    public User user(UserIdentifier userIdentifier) {
+        if (!userRepository.exists(userIdentifier)) {
+            throw new IllegalArgumentException("ユーザーが存在しません。");
+        }
+
+        if (!userRepository.existsApplication(userIdentifier)) {
+            return User.guest(userIdentifier);
+        }
+
+        UserApplication userApplication = userRepository.currentApplication(userIdentifier);
+        UserType userType = userApplication.appliedUserType();
+        return new User(userIdentifier, userType);
     }
 }
