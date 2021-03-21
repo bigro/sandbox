@@ -9,4 +9,8 @@ public enum UserType {
     public boolean isGuest() {
         return this == UserType.ゲスト;
     }
+
+    public boolean isMember() {
+        return this == UserType.会員;
+    }
 }

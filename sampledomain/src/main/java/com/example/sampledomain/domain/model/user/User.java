@@ -27,4 +27,8 @@ public class User {
     public boolean isGuest() {
         return type.isGuest();
     }
+
+    public boolean isMember() {
+        return type.isMember();
+    }
 }

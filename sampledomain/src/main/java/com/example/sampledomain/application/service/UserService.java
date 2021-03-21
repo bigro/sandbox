@@ -2,6 +2,7 @@ package com.example.sampledomain.application.service;
 
 import com.example.sampledomain.application.repository.UserRepository;
 import com.example.sampledomain.domain.model.guest.Guest;
+import com.example.sampledomain.domain.model.member.Member;
 import com.example.sampledomain.domain.model.user.*;
 import org.springframework.stereotype.Service;
 
@@ -31,6 +32,18 @@ public class UserService {
     }
 
     /**
+     * プレミアム登録
+     */
+    public void registerPremium(Member member) {
+        UserApplication userApplication = new UserApplication(
+                member.user(),
+                ApplicationState.プレミアム会員登録,
+                new ApplicationDateTime(LocalDateTime.now())
+        );
+        userRepository.saveApplication(userApplication);
+    }
+
+    /**
      * ユーザーを取得する
      */
     public User user(UserIdentifier userIdentifier) {
@@ -46,4 +59,5 @@ public class UserService {
         UserType userType = userApplication.appliedUserType();
         return new User(userIdentifier, userType);
     }
+
 }

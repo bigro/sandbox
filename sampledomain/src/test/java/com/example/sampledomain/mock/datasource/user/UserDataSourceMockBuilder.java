@@ -34,4 +34,19 @@ public class UserDataSourceMockBuilder {
 
         return mock;
     }
+
+    public static UserDataSource プレミアム会員申し込み済み状態を返すmock(User user) {
+        UserDataSource mock = Mockito.mock(UserDataSource.class);
+        Mockito.doReturn(true).when(mock).exists(any());
+        Mockito.doReturn(true).when(mock).existsApplication(any());
+
+        UserApplication userApplication = new UserApplication(
+                user,
+                ApplicationState.プレミアム会員登録,
+                new ApplicationDateTime(LocalDateTime.now())
+        );
+        Mockito.doReturn(userApplication).when(mock).currentApplication(any());
+
+        return mock;
+    }
 }
