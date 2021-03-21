@@ -49,4 +49,19 @@ public class UserDataSourceMockBuilder {
 
         return mock;
     }
+
+    public static UserDataSource 通常会員から退会申し込み済み状態を返すmock(User user) {
+        UserDataSource mock = Mockito.mock(UserDataSource.class);
+        Mockito.doReturn(true).when(mock).exists(any());
+        Mockito.doReturn(true).when(mock).existsApplication(any());
+
+        UserApplication userApplication = new UserApplication(
+                user,
+                ApplicationState.退会,
+                new ApplicationDateTime(LocalDateTime.now())
+        );
+        Mockito.doReturn(userApplication).when(mock).currentApplication(any());
+
+        return mock;
+    }
 }

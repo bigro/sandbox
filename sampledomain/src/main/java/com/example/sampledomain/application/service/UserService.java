@@ -44,6 +44,19 @@ public class UserService {
     }
 
     /**
+     * 退会
+     * @param member
+     */
+    public void leave(Member member) {
+        UserApplication userApplication = new UserApplication(
+                member.user(),
+                ApplicationState.退会,
+                new ApplicationDateTime(LocalDateTime.now())
+        );
+        userRepository.saveApplication(userApplication);
+    }
+
+    /**
      * ユーザーを取得する
      */
     public User user(UserIdentifier userIdentifier) {
@@ -59,5 +72,4 @@ public class UserService {
         UserType userType = userApplication.appliedUserType();
         return new User(userIdentifier, userType);
     }
-
 }

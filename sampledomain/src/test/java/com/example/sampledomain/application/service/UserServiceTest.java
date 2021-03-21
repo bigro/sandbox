@@ -41,7 +41,15 @@ class UserServiceTest {
 
     @Test
     void 現在が通常会員の場合に退会するとゲストユーザーになる() {
+        User guest = User.guest(UserIdentifier.generate());
+        userService = new UserService(UserDataSourceMockBuilder.会員申し込み済み状態を返すmock(guest));
+        User user = userService.user(new UserIdentifier("1"));
 
+        userService.leave(Member.of(user));
+
+        userService = new UserService(UserDataSourceMockBuilder.通常会員から退会申し込み済み状態を返すmock(user));
+        User actual = userService.user(user.identifier());
+        assertEquals(UserType.ゲスト, actual.type());
     }
 
     @Test
