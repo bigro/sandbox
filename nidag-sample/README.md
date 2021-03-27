@@ -3,7 +3,7 @@
 ## ローカル準備
 ```
 cd docker
-docker-compose up
+docker-compose up -d
 docker exec -it ndiag-command bash
 cd /home/ndiag/sample
 ```
