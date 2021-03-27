@@ -1,0 +1,10 @@
+version: "3.9"
+services:
+  ndiag:
+    image: ndiag-command
+    container_name: ndiag-command
+    build:
+      context: .
+    volumes:
+      - "../:/home/ndiag/sample"
+    tty: true
