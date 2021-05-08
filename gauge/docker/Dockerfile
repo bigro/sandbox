@@ -11,7 +11,12 @@ RUN apt-get update && apt-get install -q -y \
     curl \
     unzip \
     npm \
-    tzdata
+    tzdata \
+    ibgtk-3.0 \
+    libgbm-dev \
+    libnss3 \
+    libatk-bridge2.0-0 \
+    libasound2
 
 # Install gauge
 RUN curl -SsL https://downloads.gauge.org/stable | sh
