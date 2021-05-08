@@ -5,7 +5,7 @@ import {
     checkBox,
     click,
     closeBrowser,
-    evaluate,
+    evaluate, focus,
     goto,
     into,
     link,
@@ -33,7 +33,12 @@ export default class StepImplementation {
     @Step("ページを開く")
     public async openPage() {
         await goto("https://bigro.github.io/html-sandbox/");
-        await screenshot();
     }
+
+    @Step("フォームに入力する")
+    public async writeForm() {
+        await focus(textBox('Email address'));
+        await write('aaaa');
+        await screenshot();    }
 
 }
