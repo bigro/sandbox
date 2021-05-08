@@ -1,0 +1,10 @@
+version: "3.9"
+services:
+
+  gauge:
+    build: .
+    image: gauge
+    container_name: gauge
+    tty: true
+    volumes:
+      - ../test:/home/gauge-test
