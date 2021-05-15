@@ -10,7 +10,7 @@ import {
     into,
     link,
     openBrowser,
-    press,
+    press, radioButton,
     screenshot,
     text,
     textBox,
@@ -39,6 +39,18 @@ export default class StepImplementation {
     public async writeForm() {
         await focus(textBox('Email address'));
         await write('aaaa');
-        await screenshot();    }
+    }
+
+    @Step("ラジオボタンをクリックする")
+    public async clickRadioButton() {
+        await click(radioButton('ラジオ2'));
+        await screenshot();
+    }
+
+    @Step("テキストをクリックする")
+    public async clickText() {
+        await click('他要素に覆われている');
+        await screenshot();
+    }
 
 }
