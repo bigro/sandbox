@@ -1,0 +1,10 @@
+version: "3.9"
+services:
+
+  nodejs:
+    build: .
+    image: node16
+    container_name: node16
+    tty: true
+    volumes:
+      - ../app:/home/app
